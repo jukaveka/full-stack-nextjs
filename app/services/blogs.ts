@@ -20,6 +20,23 @@ const blogs = [
   }
 ]
 
+const getNewId = () => {
+  const identifiers = blogs.map(blog => blog.id)
+  return Math.max(...identifiers) + 1
+}
+
 export const getBlogs = () => {
   return blogs
+}
+
+export const addBlog = (title: string, author: string, url: string) => {
+  const newBlog = {
+    id: getNewId(),
+    title,
+    author,
+    url,
+    likes: 0,
+  }
+
+  blogs.push(newBlog)
 }
