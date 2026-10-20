@@ -11,7 +11,7 @@ const UserPage = async () => {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            {user.name}
+            <a href={`/users/${user.id}`}>{user.name}</a>
           </li>
         ))}
       </ul>
