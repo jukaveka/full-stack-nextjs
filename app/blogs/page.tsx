@@ -4,29 +4,18 @@ import { getBlogs } from "../services/blogs"
 
 const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string }>}) => {
   const { filter } = await searchParams
-  let listedBlogs
-  const blogs = getBlogs()
-  const sortedBlogs = blogs.toSorted((a, b) => b.likes - a.likes)
-
-  if (filter) {
-    listedBlogs = sortedBlogs.filter((blog) => blog.title.toLowerCase().includes(filter.toLowerCase()))
-  } else {
-    listedBlogs = sortedBlogs
-  }
+  const blogs = await getBlogs(filter)
 
   return (
     <div>
       <h3> Blogs </h3>
         <form action={`/blogs`}>
-          <label>
-            Filter
-            <input type="text" name="filter" id="filter" />
-          </label>
+          <input type="text" name="filter" id="filter" />
           {"   "}
           <button type="submit"> Filter </button>
         </form>
       <ul>
-        {listedBlogs.map((blog) => (
+        {blogs.map((blog) => (
           <li key={blog.id}> 
             {blog.author}: <a href={`/blogs/${blog.id}`}>{blog.title}</a>, {blog.likes} likes
           </li>

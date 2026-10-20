@@ -1,58 +1,39 @@
-const blogs = [
-  {
-    id     : 1,
-    author : "Nick Sturdivant",
-    url    : "https://blogs.perficient.com/replacing-postman-with-the-rest-client-visual-studio-code-extension/",
-    title  : "Replacing Postman with the REST Client Visual Studio Code Extension",
-    likes  : 5
-  }, {
-    id     : 2,
-    author : "Damilola Olatunji",
-    url    : "https://blog.appsignal.com/2025/06/11/using-sql-in-nodejs-with-sequelize.html",
-    title  : "Using SQL in Node.js with Sequelize",
-    likes  : 0
-  }, {
-    id     : 3,
-    author : "John Loewen",
-    url    : "https://towardsai.com/p/machine-learning/sturdy-gpt-4-guardrails-better-prompting-for-python-code-results",
-    title  : "Sturdy GPT-4 Guardrails: Better Prompting For Python Code Results",
-    likes  : 3
-  }
-]
+import { blogs } from "../../db/schema"
+import { db } from "../../db"
+import { desc, eq, like } from "drizzle-orm"
 
-const getNewId = () => {
-  const identifiers = blogs.map(blog => blog.id)
-  return Math.max(...identifiers) + 1
-}
 
-export const getBlogs = () => {
-  return blogs
-}
-
-export const addBlog = (title: string, author: string, url: string) => {
-  const newBlog = {
-    id: getNewId(),
-    title,
-    author,
-    url,
-    likes: 0,
+export const getBlogs = async (filter: string) => {
+  if (filter) {
+    return db.query.blogs.findMany({
+      where: like(blogs.title, `%${filter}%`),
+      orderBy: desc(blogs.likes)
+    })
   }
 
-  blogs.push(newBlog)
+  return db.query.blogs.findMany({
+    orderBy: desc(blogs.likes)
+  })
 }
 
-export const getBlogById = (id: number) => {
-  return blogs.find((blog) => blog.id === id)
+export const addBlog = async (title: string, author: string, url: string) => {
+  return await db.insert(blogs).values({ title, author, url })
 }
 
-export const increaseBlogLikes = (id: number) => {
-  const blog = blogs.find((blog) => blog.id === id)
+export const getBlogById = async (id: number) => {
+  return await db.query.blogs.findFirst({ where: eq(blogs.id, id) })
+}
+
+export const increaseBlogLikes = async (id: number) => {
+  const blog = await getBlogById(id)
 
   if (!blog) {
     return null
   }
 
-  const updatedBlog = {...blog, likes: blog.likes + 1}
-  const index = blogs.findIndex((blog) => blog.id === id)
-  blogs.splice(index, 1, updatedBlog)
+  const increasedLikes = blog.likes + 1
+
+  return await db.update(blogs)
+    .set({ likes: increasedLikes })
+    .where(eq(blogs.id, id))
 }
