@@ -7,7 +7,7 @@ export default function Blogs() {
       <ul>
         {blogs.map((blog) => (
           <li key={blog.id}> 
-            {blog.author}: <a href={blog.url}>{blog.title}</a>, {blog.likes} likes 
+            {blog.author}: <a href={`/blogs/${blog.id}`}>{blog.title}</a>, {blog.likes} likes
           </li>
         ))}
       </ul>
