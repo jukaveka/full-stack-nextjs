@@ -1,8 +1,8 @@
+export const instant = false
+
 import { addLike } from "@/app/actions/blogs"
 import { getBlogById } from "@/app/services/blogs"
 import { notFound } from "next/navigation"
-
-export const instant = false
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
