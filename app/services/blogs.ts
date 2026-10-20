@@ -44,3 +44,15 @@ export const addBlog = (title: string, author: string, url: string) => {
 export const getBlogById = (id: number) => {
   return blogs.find((blog) => blog.id === id)
 }
+
+export const increaseBlogLikes = (id: number) => {
+  const blog = blogs.find((blog) => blog.id === id)
+
+  if (!blog) {
+    return null
+  }
+
+  const updatedBlog = {...blog, likes: blog.likes + 1}
+  const index = blogs.findIndex((blog) => blog.id === id)
+  blogs.splice(index, 1, updatedBlog)
+}
