@@ -24,7 +24,7 @@ export const addBlog = async (title: string, author: string, url: string) => {
     throw new Error("Operation requires login")
   }
 
-  return await db.insert(blogs).values({ title, author, url, userId: 1})
+  return await db.insert(blogs).values({ title, author, url, userId: user.id})
 }
 
 export const getBlogById = async (id: number) => {
