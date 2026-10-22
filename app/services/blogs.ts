@@ -1,6 +1,7 @@
 import { blogs } from "../../db/schema"
 import { db } from "../../db"
 import { desc, eq, like } from "drizzle-orm"
+import { getCurrentUser } from "../actions/session"
 
 
 export const getBlogs = async (filter: string) => {
@@ -17,6 +18,12 @@ export const getBlogs = async (filter: string) => {
 }
 
 export const addBlog = async (title: string, author: string, url: string) => {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    throw new Error("Operation requires login")
+  }
+
   return await db.insert(blogs).values({ title, author, url, userId: 1})
 }
 
