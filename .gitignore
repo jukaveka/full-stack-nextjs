@@ -41,3 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 local_test_data_stuff.txt
+set_password.ts
