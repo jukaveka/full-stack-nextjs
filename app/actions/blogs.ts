@@ -5,26 +5,32 @@ import { addBlog, increaseBlogLikes } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
 
-export const createBlog = async (prevState: { error: string }, formData: FormData) => {
+export const createBlog = async (prevState: { errors: object }, formData: FormData) => {
   const session = await auth()
 
   if (!session) {
     redirect("/login")
   }
 
+  const errors = { title: "", author: "", url: "" }
+
   const title = formData.get("title") as string
   if (!title || title.length < 5 ) {
-    return { error: "Title is required and must be at least 5 characters long."}
+    errors.title = "Title is required and must be at least 5 characters long."
   }
 
   const author = formData.get("author") as string
   if (!author || author.length < 5 ) {
-    return { error: "Author is required and must be at least 5 characters long."}
+    errors.author = "Author is required and must be at least 5 characters long."
   }
 
   const url = formData.get("url") as string
   if (!url || url.length < 5 ) {
-    return { error: "URL is required and must be at least 5 characters long."}
+    errors.url = "URL is required and must be at least 5 characters long."
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return { errors }
   }
 
   await addBlog(title, author, url)
