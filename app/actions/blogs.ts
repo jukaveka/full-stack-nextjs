@@ -5,7 +5,7 @@ import { addBlog, increaseBlogLikes } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
 
-export const createBlog = async (prevState: { errors: object }, formData: FormData) => {
+export const createBlog = async (prevState: { errors: object, values: object, success: boolean }, formData: FormData) => {
   const session = await auth()
 
   if (!session) {
@@ -32,13 +32,13 @@ export const createBlog = async (prevState: { errors: object }, formData: FormDa
   const hasErrors = errors.title.length > 0 || errors.author.length > 0 || errors.url.length > 0
 
   if (hasErrors) {
-    return { errors, values: { title, author, url } }
+    return { errors, values: { title, author, url }, success: false }
   }
 
   await addBlog(title, author, url)
 
   revalidatePath("/blogs")
-  redirect("/blogs")
+  return { errors, values: { title, author, url }, success: true }
 }
 
 export const addLike = async (formData: FormData) => {

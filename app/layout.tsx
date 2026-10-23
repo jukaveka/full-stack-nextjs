@@ -1,4 +1,6 @@
 import NavBar from "./components/NavBar"
+import Notification from "./components/Notification"
+import { NotificationProvider } from "./components/NotificationProvider"
 import AuthSessionProvider from "./components/SessionProvider"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -6,8 +8,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <AuthSessionProvider>
-          <NavBar />
-          {children}
+          <NotificationProvider>
+            <NavBar />
+            <Notification />
+            {children}
+          </NotificationProvider>
         </AuthSessionProvider>
       </body>
     </html>
