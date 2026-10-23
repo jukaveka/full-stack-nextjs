@@ -29,8 +29,10 @@ export const createBlog = async (prevState: { errors: object }, formData: FormDa
     errors.url = "URL is required and must be at least 5 characters long."
   }
 
-  if (Object.keys(errors).length > 0) {
-    return { errors }
+  const hasErrors = errors.title.length > 0 || errors.author.length > 0 || errors.url.length > 0
+
+  if (hasErrors) {
+    return { errors, values: { title, author, url } }
   }
 
   await addBlog(title, author, url)
