@@ -5,7 +5,7 @@ import { useActionState } from "react";
 
 const NewBlog = () => {
   const [state, formAction] = useActionState(createBlog, {
-    errors: { title: "", author: "", url: ""},
+    errors: { title: "", author: "", url: "" },
     values: { title: "", author: "", url: "" }
   })
 
