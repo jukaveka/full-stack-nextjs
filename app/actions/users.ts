@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm"
 import { users } from "@/db/schema"
 
 export const registerUser = async (prevState: { errors: object, values: object }, formData: FormData) => {
-  const errors = { username: "", name: "", password: "", passwordAgain: "" }
+  const errors = { username: "", name: "", password: "", passwordConfirm: "" }
 
   const username = formData.get("username") as string
   if (!username || username.length < 4) {
@@ -27,20 +27,20 @@ export const registerUser = async (prevState: { errors: object, values: object }
     errors.name = "Name is required"
   }
 
-  const password = formData.get("password") as string  
+  const password = formData.get("password") as string
   if (!password || password.length < 4) {
     errors.password = "Password is required and has to be at least 4 characters long"
   }
-  
-  const passwordAgain = formData.get("passwordAgain") as string
-  if(password !== passwordAgain) {
-    errors.passwordAgain = "Passwords don't match"
+
+  const passwordConfirm = formData.get("passwordConfirm") as string
+  if(password !== passwordConfirm) {
+    errors.passwordConfirm = "Passwords don't match"
   }
 
-  const hasErrors = errors.username.length > 0 || errors.name.length > 0 || errors.password.length > 0 || errors.passwordAgain.length > 0
+  const hasErrors = errors.username.length > 0 || errors.name.length > 0 || errors.password.length > 0 || errors.passwordConfirm.length > 0
 
   if (hasErrors) {
-    return { errors, values: { username, name, password, passwordAgain } }
+    return { errors, values: { username, name, password, passwordConfirm } }
   }
 
   const passwordHash = await bcrypt.hash(password, 10)

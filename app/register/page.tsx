@@ -5,8 +5,8 @@ import { registerUser } from "../actions/users"
 
 const RegisterPage = () => {
   const [state, formAction] = useActionState(registerUser, {
-    errors: { username: "", name: "", password: "", passwordAgain: "" } ,
-    values: { username: "", name: "", password: "", passwordAgain: "" }
+    errors: { username: "", name: "", password: "", passwordConfirm: "" } ,
+    values: { username: "", name: "", password: "", passwordConfirm: "" }
   })
 
   return (
@@ -48,9 +48,9 @@ const RegisterPage = () => {
         <div>
           <label>
             Password again<br/>
-            <input type="password" name="passwordAgain" defaultValue={state.values.passwordAgain} />
+            <input type="password" name="passwordConfirm" defaultValue={state.values.passwordConfirm} />
           </label>
-          {state.errors.passwordAgain && <p style={{ color: "red" }}>{state.errors.passwordAgain}</p>}
+          {state.errors.passwordConfirm && <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>}
         </div>
 
         <br/>
