@@ -13,25 +13,24 @@ const NewBlog = () => {
         <form action={formAction}>
 
           <label>
-            Title <br/>
-            {state.errors.title && <p style={{ color: "red" }}> {state.errors.title} </p>} <br/>
+            Title
+            {state.errors.title && <p style={{ color: "red" }}> {state.errors.title} </p>}<br/>
             <input type="text" name="title" id="title" />
-
           </label>
 
-          <br/><br/><br/>
+          <br/><br/>
 
           <label>
-            Author<br/>
-            {state.errors.author && <p style={{ color: "red" }}> {state.errors.author} </p>} <br/>
+            Author
+            {state.errors.author && <p style={{ color: "red" }}> {state.errors.author} </p>}<br/>
             <input type="text" name="author" id="author" />
           </label>
 
-          <br/><br/><br/>
+          <br/><br/>
 
           <label>
             URL <br/>
-            {state.errors.url && <p style={{ color: "red" }}> {state.errors.url} </p>} <br/>
+            {state.errors.url && <p style={{ color: "red" }}> {state.errors.url} </p>}
             <input type="text" name="url" id="url" />
           </label>
 
