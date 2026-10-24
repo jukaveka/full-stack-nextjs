@@ -1,5 +1,3 @@
-export const instant = false
-
 import { addLike } from "@/app/actions/blogs"
 import { getBlogById } from "@/app/services/blogs"
 import { notFound } from "next/navigation"
