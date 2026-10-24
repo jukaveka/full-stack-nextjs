@@ -1,5 +1,3 @@
-export const instant = false
-
 import { getUserWithBlogs } from "@/app/services/users"
 import { notFound } from "next/navigation"
 

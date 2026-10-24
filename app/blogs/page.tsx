@@ -1,5 +1,3 @@
-export const instant = false
-
 import { getBlogs } from "../services/blogs"
 
 const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string }>}) => {
