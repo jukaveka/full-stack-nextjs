@@ -5,7 +5,7 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string 
   const blogs = await getBlogs(filter)
 
   return (
-    <div className="bg-mist-100">
+    <div>
 
       <p className="text-3xl px-10 py-5"> Blogs </p>
 
