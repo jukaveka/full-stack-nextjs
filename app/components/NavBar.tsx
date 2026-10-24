@@ -16,6 +16,7 @@ const NavBar = () => {
           <>
             <NavLink href="/blogs/new"> new blog </NavLink>
             <em className="text-slate-300">{ session.user?.name } logged in</em>
+            <NavLink href="/me"> me </NavLink>
             <button onClick={() => signOut()} className="bg-slate-600 px-5 py-3 rounded text-sm hover:bg-slate-500">logout</button>
           </>
         ) : (

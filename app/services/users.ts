@@ -16,3 +16,10 @@ export const getUserWithBlogs = async (username: string) => {
 export const addUser = async (username: string, name: string, passwordHash: string) => {
   return await db.insert(users).values({ username, name, passwordHash })
 }
+
+export const updateToken = async (userId: number, newToken: string) => {
+  return await db
+    .update(users)
+    .set({ token: newToken })
+    .where(eq(users.id, userId))
+}
