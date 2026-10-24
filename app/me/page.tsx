@@ -16,7 +16,7 @@ const ProfilePage = async () => {
 
       <p> <a className="font-bold">Name:</a> {user.name}</p>
 
-      <p> <a className="font-bold">Username</a> {user.username}</p>
+      <p> <a className="font-bold">Username:</a> {user.username}</p>
 
       <p className="font-bold text-2xl py-5"> API Token </p>
       

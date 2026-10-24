@@ -1,0 +1,4 @@
+@token = REPLACE_WITH_TOKEN
+
+GET http://localhost:3000/api/me
+Authorization: Bearer {{token}}
