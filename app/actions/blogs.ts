@@ -38,6 +38,7 @@ export const createBlog = async (prevState: { errors: object, values: object, su
   await addBlog(title, author, url)
 
   revalidatePath("/blogs")
+  revalidatePath("/me")
   return { errors, values: { title, author, url }, success: true }
 }
 

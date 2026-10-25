@@ -30,3 +30,16 @@ export const getUserByToken = async (token: string) => {
     with: { blogs: true }
   })
 }
+
+export const getUserWithReadingList = async (username: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.username, username),
+    with: {
+      readingLists: {
+        columns: { read: true, id: true },
+        with: {
+          blogs: true
+        }
+    }}
+  })
+}

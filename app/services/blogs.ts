@@ -1,4 +1,4 @@
-import { blogs } from "../../db/schema"
+import { blogs, readingLists } from "../../db/schema"
 import { db } from "../../db"
 import { desc, eq, like } from "drizzle-orm"
 import { getCurrentUser } from "../actions/session"
@@ -24,7 +24,8 @@ export const addBlog = async (title: string, author: string, url: string) => {
     throw new Error("Operation requires login")
   }
 
-  return await db.insert(blogs).values({ title, author, url, userId: user.id})
+  const blog = await db.insert(blogs).values({ title, author, url, userId: user.id}).returning({ id: blogs.id})
+  return await db.insert(readingLists).values({ userId: user.id, blogId: blog[0].id})
 }
 
 export const getBlogById = async (id: number) => {
