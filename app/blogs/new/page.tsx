@@ -22,10 +22,10 @@ const NewBlog = () => {
   }, [state, showNotification, router])
 
   return (
-    <div>
-      <h3 className="text-3xl px-10 py-5"> Add new blog </h3>
+    <div className=" shadow m-auto w-2xl px-10 py-10 mt-10" >
+      <h3 className="text-3xl font-bold pl-35 py-5"> Enter new blog </h3>
 
-        <form action={formAction} className="px-10">
+        <form action={formAction} className="px-35">
 
           <div className="block py-3">
             <label className="font-bold block mb-1"> Title </label>
