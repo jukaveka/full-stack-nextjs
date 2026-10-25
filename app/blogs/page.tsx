@@ -5,7 +5,7 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string 
   const blogs = await getBlogs(filter)
 
   return (
-    <div>
+    <div className=" shadow m-auto w-3xl px-10 py-10 mt-10">
 
       <p className="text-3xl px-10 py-5"> Blogs </p>
 
@@ -26,11 +26,15 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string 
 
       <ul className="px-10">
         {blogs.map((blog) => (
-          <li key={blog.id} className="py-1">
-            <a className="font-bold pr-1">{blog.author}: </a>
-            <a href={`/blogs/${blog.id}`} className="text-blue-500 underline pr-1">{blog.title},</a>
-            {blog.likes} likes
-          </li>
+          <div key={blog.id}>
+           <a href={`/blogs/${blog.id}`}>
+              <li className=" bg-slate-100 hover:bg-slate-200 py-3 px-3 mb-5 block">
+                <p className="block">{blog.author}</p>
+                <p className="font-bold text-xl py-2"> {blog.title} </p>
+                <p>{blog.likes} likes</p>
+              </li>
+            </a>
+          </div>
         ))}
       </ul>
 
