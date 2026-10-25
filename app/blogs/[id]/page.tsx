@@ -1,15 +1,24 @@
 import { addLike } from "@/app/actions/blogs"
 import { addToList } from "@/app/actions/readingLists"
+import { getCurrentUserWithReadingList } from "@/app/actions/session"
 import { getBlogById } from "@/app/services/blogs"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
   const blog = await getBlogById(Number(id))
+  const user = await getCurrentUserWithReadingList()
 
   if (!blog) {
     return notFound()
   }
+
+  if (!user) {
+    redirect("/login")
+  }
+
+  const readingListBlogIds = user.readingLists.map((list) => list.blogs.id)
+  const unmarked = blog.userId !== user.id && !readingListBlogIds.includes(blog.id)
 
   return (
     <div className="px-10 py-10 w-3xl shadow m-auto mt-10">
@@ -29,17 +38,26 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </button> 
         </form>
 
-        <a href={blog.url} className="bg-violet-400 hover:bg-violet-500  text-white px-7 py-3 rounded font-bold"> READ </a>
+        <a
+          href={blog.url}
+          className="bg-violet-400 hover:bg-violet-500  text-white px-7 py-3 rounded font-bold"
+        >
+          LINK
+        </a>
 
-        <form action={addToList} className="px-10 py-2">
-          <input type="hidden" name="blogId" value={blog.id} />
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 px-7 py-3 text-white rounded font-bold"
-          >
-            MARK
-          </button>
-        </form>
+        {unmarked ? (
+          <form action={addToList} className="px-10 py-2">
+            <input type="hidden" name="blogId" value={blog.id} />
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 px-7 py-3 text-white rounded font-bold"
+            >
+              MARK
+            </button>
+          </form>
+        ) : (
+          null
+        )}
 
       </div>
     </div>
