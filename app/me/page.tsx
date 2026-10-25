@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation"
-import { getCurrentUser } from "../actions/session"
+import { getCurrentUserWithReadingList } from "../actions/session"
 import { generateToken } from "../actions/users"
 import { markAsRead } from "../actions/readingLists"
 
 const ProfilePage = async () => {
-  const user = await getCurrentUser()
+  const user = await getCurrentUserWithReadingList()
 
   if (!user) {
     return notFound()
   }
-
 
   const read = user.readingLists.filter((blog) => blog.read).map((blog) => blog.blogs)
   const unread = user.readingLists.filter((blog) => !blog.read).map((blog) => {

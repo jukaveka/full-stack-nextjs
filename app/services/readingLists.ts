@@ -8,3 +8,9 @@ export const markBlogAsRead = async (listId: number) => {
     .set({ read: true })
     .where(eq(readingLists.id, listId))
 }
+
+export const addBlogToList = async (userId: number, blogId: number) => {
+  return db
+    .insert(readingLists)
+    .values({ userId, blogId })
+}
