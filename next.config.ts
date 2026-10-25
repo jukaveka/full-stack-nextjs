@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx"
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -7,6 +8,7 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: false,
   partialPrefetching: false,
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   turbopack: {
     rules: {
       "*.css": {
@@ -17,4 +19,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withMDX = createMDX({})
+
+export default withMDX(nextConfig)
