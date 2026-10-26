@@ -15,13 +15,13 @@ export const blogs = pgTable("blogs", {
   author: text("author").notNull(),
   url: text("url").notNull(),
   likes: integer("likes").notNull().default(0),
-  userId: integer("user_id").notNull().references(() => users.id),
+  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade"}),
 })
 
 export const readingLists = pgTable("reading_lists", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().references(() => users.id),
-  blogId: integer("blog_id").notNull().references(() => blogs.id),
+  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade"}),
+  blogId: integer("blog_id").notNull().references(() => blogs.id, { onDelete: "cascade"}),
   read: boolean("read").notNull().default(false),
 }, (table) => [
   unique().on(table.userId, table.blogId),

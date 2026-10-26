@@ -36,6 +36,20 @@
       "when": 1792946644115,
       "tag": "0004_easy_sunspot",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793051017135,
+      "tag": "0005_marvelous_menace",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793051134276,
+      "tag": "0006_right_morgan_stark",
+      "breakpoints": true
     }
   ]
 }
