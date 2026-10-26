@@ -20,6 +20,7 @@ export const registerUser = async (prevState: { errors: object, values: object }
   const user = await db.query.users.findFirst({
     where: eq(users.username, username)
   })
+
   if (user) {
     errors.username = "Username is already in use. Choose another username"
   }

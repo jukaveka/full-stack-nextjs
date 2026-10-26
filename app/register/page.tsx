@@ -16,52 +16,61 @@ const RegisterPage = () => {
       <form action={formAction}>
 
         <div className="py-2">
-          <label> Username </label>
-          <input
-            type="text"
-            name="username"
-            defaultValue={state.values.username}
-            className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
-          />
-          {state.errors.username && <p style={{ color: "red" }}>{state.errors.username}</p>}
+          <label>
+            Username
+            <input
+              type="text"
+              name="username"
+              defaultValue={state.values.username}
+              className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
+            />
+          </label>
+          {state.errors.username && <p data-testid="username-error" style={{ color: "red" }}>{state.errors.username}</p>}
         </div>
 
         <div className="py-2">
-          <label> Name </label>
-          <input
-            type="text"
-            name="name"
-            defaultValue={state.values.name}
-            className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
-          />
-          {state.errors.name && <p style={{ color: "red" }}>{state.errors.name}</p>}
+          <label>
+            Name
+            <input
+              type="text"
+              name="name"
+              defaultValue={state.values.name}
+              className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
+            />
+          </label>
+          {state.errors.name && <p data-testid="name-error" style={{ color: "red" }}>{state.errors.name}</p>}
         </div>
 
         <div className="py-2">
-          <label> Password </label>
-          <input
-            type="password"
-            name="password"
-            defaultValue={state.values.password}
-            className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
-          />
-          {state.errors.password && <p style={{ color: "red" }}>{state.errors.password}</p>}
+          <label>
+            Password
+            <input
+              type="password"
+              name="password"
+              defaultValue={state.values.password}
+              className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
+            />
+             </label>
+          {state.errors.password && <p data-testid="password-error" style={{ color: "red" }}>{state.errors.password}</p>}
         </div>
 
         <div className="py-2">
-          <label> Password again </label>
-          <input
-            type="password"
-            name="passwordConfirm"
-            defaultValue={state.values.passwordConfirm}
-            className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
-          />
-          {state.errors.passwordConfirm && <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>}
+          <label>
+            Confirm Password
+            <input
+              type="password"
+              name="passwordConfirm"
+              defaultValue={state.values.passwordConfirm}
+              className="shadow block border px-1 py-1 border-slate-400 text-gray-800 focus:outline-none focus:shadow-outline mr-2 w-75"
+            />
+          </label>
+          {state.errors.passwordConfirm && <p data-testid="passwordConfirm-error" style={{ color: "red" }}>{state.errors.passwordConfirm}</p>}
         </div>
 
         <div className="py-5">
           <button
             type="submit"
+            data-testid="register-button"
             className="bg-slate-700 px-5 py-3 text-white rounded font-bold"
           >
             REGISTER
