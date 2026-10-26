@@ -7,9 +7,16 @@ const Notification = () => {
 
   if (!message) return null
 
-  const textColor = type === "success" ? `text-green-500` : `text-red-500`
+  const notificationColor = type === "success" ? `bg-emerald-500` : `bg-red-400`
 
-  return <div className={`bg-black-800 px-10 py-10 text-xl ${textColor}`}>{message}</div>
+  return (
+    <div
+      data-testid="notification"
+      className={`${notificationColor} text-white font-bold px-3 py-3 text-xl m-auto mt-10 w-75 rounded flex justify-center`}
+    >
+      {message}
+    </div>
+  )
 }
 
 export default Notification
