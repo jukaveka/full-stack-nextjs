@@ -21,7 +21,7 @@ const ProfilePage = async () => {
       <p className="py-5 font-bold text-3xl"> My profile </p>
 
       <p> <a className="font-bold">Name:</a> {user.name}</p>
-      <p> <a className="font-bold">Username:</a> {user.username}</p>
+      <p> <a data-testid="user-username" className="font-bold">Username:</a> {user.username}</p>
 
       <hr className="mt-10 mb-10" />
 

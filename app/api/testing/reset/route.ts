@@ -10,9 +10,9 @@ export const DELETE = async () => {
     )
   }
 
-  db.delete(users)
-  db.delete(blogs)
-  db.delete(readingLists)
+  await db.delete(users)
+  await db.delete(blogs)
+  await db.delete(readingLists)
 
   return NextResponse.json({ status: 204 })
 }
