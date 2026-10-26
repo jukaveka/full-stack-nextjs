@@ -21,9 +21,9 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const unmarked = blog.userId !== user.id && !readingListBlogIds.includes(blog.id)
 
   return (
-    <div className="px-10 py-10 w-3xl shadow m-auto mt-10">
-      <p className="text-2xl px-10 py-2 font-bold"> {blog.title} </p>
-      <p className="px-10 py-2"> Written by <a className="font-bold">{blog.author}</a> </p>
+    <div data-testid="blog-detail" className="px-10 py-10 w-3xl shadow m-auto mt-10">
+      <p data-testid="blog-title" className="text-2xl px-10 py-2 font-bold"> {blog.title} </p>
+      <p data-testid="blog-author" className="px-10 py-2"> Written by <a className="font-bold">{blog.author}</a> </p>
       <p className="text-lg px-10 py-2"> {blog.likes} likes </p>
 
       <div className="flex w-full items-center justify-center">

@@ -13,18 +13,19 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter: string 
         <input
           type="text"
           name="filter"
-          id="filter"
+          data-testid="filter-input"
           className="shadow border rounded text-gray-800 focus:outline-none focus:shadow-outline mr-2"
         />
         <button
           type="submit"
+          data-testid="search-button"
           className="bg-slate-600 px-5 py-1 text-white rounded text-bold"
         >
           Filter
         </button>
       </form>
 
-      <ul className="px-10">
+      <ul data-testid="blogs-list" className="px-10" >
         {blogs.map((blog) => (
           <div key={blog.id}>
            <a href={`/blogs/${blog.id}`}>
