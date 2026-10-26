@@ -10,10 +10,10 @@ const RegisterPage = () => {
   })
 
   return (
-    <div className="px-10">
-      <h3 className="text-3xl py-10"> Registration </h3>
+    <div className="px-10 py-10 w-2xl shadow m-auto mt-10">
+      <h3 className="text-3xl py-10 px-35"> Registration </h3>
 
-      <form action={formAction}>
+      <form action={formAction} className="px-35">
 
         <div className="py-2">
           <label>
