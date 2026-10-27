@@ -50,6 +50,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <input type="hidden" name="blogId" value={blog.id} />
             <button
               type="submit"
+              data-testid="add-to-reading-list-button"
               className="bg-blue-500 hover:bg-blue-600 px-7 py-3 text-white rounded font-bold"
             >
               MARK
