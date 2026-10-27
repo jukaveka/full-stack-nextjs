@@ -346,6 +346,8 @@ test.describe("Blog Application", () => {
         page.getByTestId("add-to-reading-list-button").click(),
       ])
 
+      await page.waitForTimeout(100)
+
       // Navigate to me page
       await page.goto("/me")
 
@@ -372,6 +374,8 @@ test.describe("Blog Application", () => {
         page.waitForResponse((response) => response.status() === 200),
         page.getByTestId("add-to-reading-list-button").click(),
       ])
+
+      await page.waitForTimeout(100)
 
       // Go to me page and mark as read
       await page.goto("/me")
@@ -412,6 +416,8 @@ test.describe("Blog Application", () => {
         page.waitForResponse((response) => response.status() === 200),
         page.getByTestId("add-to-reading-list-button").click(),
       ])
+
+      await page.waitForTimeout(100)
 
       // Go to me page
       await page.goto("/me")
