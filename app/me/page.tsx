@@ -39,35 +39,49 @@ const ProfilePage = async () => {
 
         {user.readingLists.length > 0 ? (
           <>
-            <p className="font-bold text-xl pb-5"> Unread </p>
-            <div>
-              {unread.map((blog) => (
+            <div data-testid="unread-section">
+              <p className="font-bold text-xl pb-5"> Unread </p>
+
+              {unread.length > 0 ? (
+                unread.map((blog) => (
                 <div key={blog.id} className="bg-sky-100 px-4 py-4 mb-5 rounded w-full">
                   <form action={markAsRead} className="flex justify-between items-center">
                     {blog.title}
                     <input type="hidden" name="listId" value={blog.readingListId} />
                     <button
                       type="submit"
-              
+                      data-testid={`mark-read-${blog.id}`}
                       className="bg-blue-500 hover:bg-blue-700 px-5 py-3 text-white rounded font-bold "
                     >
-                      DONE
+                      READ
                     </button>
                   </form>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div data-testid="no-unread-blogs">
+                You currently have no unread blogs. Add your own blogs or browse blogs for more reading
+              </div>
+            )}
             </div>
 
             <p className="font-bold text-xl py-5"> Read </p>
-            {read.map((blog) => (
-              <div key={blog.id} className="bg-green-100 px-4 py-4 mb-5 rounded w-full">
-                {blog.title}
+
+            {read.length > 0 ? (
+              read.map((blog) => (
+                <div key={blog.id} className="bg-green-100 px-4 py-4 mb-5 rounded w-full">
+                  {blog.title}
+                </div>
+              ))
+            ) : (
+              <div>
+                You currently have no read blogs. Mark blogs as read, and they will show here.
               </div>
-            ))}
+            )}
           </>
         ) : (
           <div data-testid="empty-reading-list">
-            Reading list is empty. Start by adding blogs or browsing blogs added by others
+            Reading list is empty. Add your own blogs or browse blogs for more reading
           </div>
         )}
       </div>
