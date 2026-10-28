@@ -1,3 +1,10 @@
+##  Full Stack Open: Next.js (1 op) (CSM14115)
+
+Vercel public URL for project developed in the course.
+https://full-stack-nextjs-theta.vercel.app/
+
+___
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
