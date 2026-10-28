@@ -26,38 +26,39 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <p data-testid="blog-author" className="px-10 py-2"> Written by <a className="font-bold">{blog.author}</a> </p>
       <p className="text-lg px-10 py-2"> {blog.likes} likes </p>
 
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center gap-10 py-5">
 
-        <form action={addLike} className="px-10">
+        <form action={addLike}>
           <input type="hidden" name="id" value={blog.id} />
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 px-7 py-3 text-white rounded font-bold"
+            className="bg-green-500 hover:bg-green-600 px-3 py-3 text-white rounded font-bold w-35"
           >
             LIKE
           </button> 
         </form>
 
-        <a
-          href={blog.url}
-          className="bg-violet-400 hover:bg-violet-500  text-white px-7 py-3 rounded font-bold"
-        >
-          LINK
+        <a href={blog.url}>
+          <button className="bg-violet-400 hover:bg-violet-500  text-white px-7 py-3 rounded font-bold w-35">
+            READ
+          </button>
         </a>
 
         {unmarked ? (
-          <form action={addToList} className="px-10 py-2">
+          <form action={addToList}>
             <input type="hidden" name="blogId" value={blog.id} />
             <button
               type="submit"
               data-testid="add-to-reading-list-button"
-              className="bg-blue-500 hover:bg-blue-600 px-7 py-3 text-white rounded font-bold"
+              className="bg-blue-500 hover:bg-blue-600 px-x py-3 text-white rounded font-bold w-35"
             >
               MARK
             </button>
           </form>
         ) : (
-          null
+            <button disabled className="bg-gray-200 px-3 py-3 text-gray-400 rounded font-bold w-35">
+              MARKED
+            </button>
         )}
 
       </div>
