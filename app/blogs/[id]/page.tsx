@@ -56,7 +56,10 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             </button>
           </form>
         ) : (
-            <button disabled className="bg-gray-200 px-3 py-3 text-gray-400 rounded font-bold w-35">
+            <button
+              disabled
+              data-testid="add-to-reading-list-button-disabled"
+              className="bg-gray-200 px-3 py-3 text-gray-400 rounded font-bold w-35">
               MARKED
             </button>
         )}

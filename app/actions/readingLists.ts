@@ -23,6 +23,6 @@ export const addToList = async (formData: FormData) => {
 
   await addBlogToList(user?.id, Number(blogId))
 
-  revalidatePath(`/blog/${blogId}`)
   revalidatePath("/me")
+  revalidatePath(`/blogs/${blogId}`)
 }
