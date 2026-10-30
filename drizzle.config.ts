@@ -3,7 +3,7 @@ import * as dotenv from "dotenv"
 
 // Load .env.test in test environment, otherwise .env.local
 const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env.local"
-dotenv.config({ path: envFile })
+dotenv.config({ path: envFile, override: true })
 
 export default defineConfig({
   schema: "./db/schema.ts",

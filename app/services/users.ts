@@ -38,7 +38,7 @@ export const getUserByToken = async (token: string) => {
 }
 
 export const getUserWithReadingList = async (username: string) => {
-  return db.query.users.findFirst({
+  return await db.query.users.findFirst({
     where: eq(users.username, username),
     with: {
       readingLists: {

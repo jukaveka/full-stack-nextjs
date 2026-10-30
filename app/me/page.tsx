@@ -1,18 +1,20 @@
 import { redirect } from "next/navigation"
-import { getCurrentUserWithReadingList } from "../actions/session"
+import { getCurrentUser } from "../actions/session"
 import { generateToken } from "../actions/users"
 import { markAsRead } from "../actions/readingLists"
+import { getListsByUserId } from "../services/readingLists"
 
 const ProfilePage = async () => {
-  const user = await getCurrentUserWithReadingList()
+  const user = await getCurrentUser()
 
   if (!user) {
     redirect("/login")
   }
 
-  const read = user.readingLists.filter((blog) => blog.read).map((blog) => blog.blogs)
-  const unread = user.readingLists.filter((blog) => !blog.read).map((blog) => {
-    return {...blog.blogs, readingListId: blog.id} 
+  const readingLists = await getListsByUserId(user.id)
+  const read = readingLists.filter((list) => list.read).map((list) => list.blogs)
+  const unread = readingLists.filter((list) => !list.read).map((list) => {
+    return { ...list.blogs, readingListId: list.id }
   })
 
   return (
@@ -37,7 +39,7 @@ const ProfilePage = async () => {
       <div data-testid="reading-list-section">
         <p className="font-bold text-2xl py-5"> Reading list </p>
 
-        {user.readingLists.length > 0 ? (
+        {readingLists.length > 0 ? (
           <>
             <div data-testid="unread-section">
               <p className="font-bold text-xl pb-5"> Unread </p>

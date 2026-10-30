@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { readingLists } from "@/db/schema"
+import { blogs, readingLists } from "@/db/schema"
 import { eq } from "drizzle-orm"
 
 export const markBlogAsRead = async (listId: number) => {
@@ -10,7 +10,18 @@ export const markBlogAsRead = async (listId: number) => {
 }
 
 export const addBlogToList = async (userId: number, blogId: number) => {
-  return db
+  return await db
     .insert(readingLists)
     .values({ userId, blogId })
+}
+
+export const getListsByUserId = async (userId: number) => {
+  return await db.query.readingLists.findMany({
+    where: eq(readingLists.userId, userId),
+    with: {
+      blogs: {
+        columns: { id: true, title: true, url: true }
+      }
+    }
+  })
 }
